@@ -13,8 +13,12 @@ services:
       - TYPEORM_PASSWORD=$TYPEORM_PASSWORD
       - TYPEORM_DATABASE=$TYPEORM_DATABASE
       - TYPEORM_SYNCHRONIZE=$TYPEORM_SYNCHRONIZE
+      - JWT_ACCESS_TOKEN_SECRET=auth_test
+      - JWT_ACCESS_TOKEN_EXPIRATION_TIME=3m
+      - JWT_REFRESH_TOKEN_SECRET=refresh_test
+      - JWT_REFRESH_TOKEN_EXPIRATION_TIME=6h
     ports: 
-      - 3003:3000
+      - 3000:3000
   postgres:
     image: postgres
     ports:

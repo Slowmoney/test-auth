@@ -36,7 +36,7 @@ export class AuthService {
 
   async signIn(data: SignInDto) {
     const user = await this.userRepository.findOneBy({ email: data.email });
-    if (!user) throw new UserNotFoundException();
+    if (!user) throw new InvalidPasswordException();
 
     const isPasswordValid = await this.validatePassword(
       data.password,
