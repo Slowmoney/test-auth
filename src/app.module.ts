@@ -25,4 +25,4 @@ import { NewsModule } from './news/news.module';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

@@ -10,13 +10,12 @@ import { InvalidPasswordException } from './exceptions/invalid-password.exceptio
 import { UserNotFoundException } from './exceptions/user-not-found.exception';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 
-
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private jwtService: JwtService,
-  ) { }
+  ) {}
   async signUp(data: SignUpDto) {
     try {
       const user = new User();
@@ -28,12 +27,11 @@ export class AuthService {
       await this.userRepository.save(user);
 
       return {
-        result: true
-      }
+        result: true,
+      };
     } catch (error) {
       throw new UnauthorizedException();
     }
-
   }
 
   async signIn(data: SignInDto) {
@@ -51,7 +49,7 @@ export class AuthService {
     return {
       ...tokens,
       userId: user.id,
-    }
+    };
   }
 
   async getNewAccessAndRefreshToken(payload: JwtPayload) {
