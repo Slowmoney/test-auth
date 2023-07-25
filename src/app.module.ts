@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entities/user.entity';
 import configSchema from './config.schema';
 import { NewsModule } from './news/news.module';
+import { News } from './news/entities/news.entity';
 
 @Module({
   imports: [
@@ -14,10 +15,8 @@ import { NewsModule } from './news/news.module';
     TypeOrmModule.forRootAsync({
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {
-          autoLoadEntities: true,
           synchronize: true,
-          entities: [User],
-          database: 'user',
+          entities: [User, News],
         } as TypeOrmModuleOptions),
     }),
     ConfigModule.forRoot({ validationSchema: configSchema }),
