@@ -1,4 +1,7 @@
-export class UserNotFoundException {
-  message = 'User not found';
-  code = 2001;
+import { NotFoundException } from '@nestjs/common';
+
+export class UserNotFoundException extends NotFoundException {
+  constructor() {
+    super({ message: 'User not found', code: 2001 });
+  }
 }

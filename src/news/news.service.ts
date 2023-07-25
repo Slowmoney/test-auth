@@ -1,9 +1,11 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { News } from './entities/news.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { NewsNotFoundException } from './exceptions/news-not-found.exception';
+import { DontAccessNewsException } from './exceptions/dont-access-news.exception';
 
 @Injectable()
 export class NewsService {
@@ -30,14 +32,13 @@ export class NewsService {
 
   async findOne(id: number) {
     const news = await this.newsRepository.findOne({ where: { id } });
-    if (!news) throw new HttpException('News not found', HttpStatus.NOT_FOUND);
+    if (!news) throw new NewsNotFoundException();
     return news;
   }
 
   async update(userId: number, id: number, updateNewsDto: UpdateNewsDto) {
     const news = await this.findOne(id);
-    if (news.userId !== userId)
-      new HttpException('Dont access to news', HttpStatus.FORBIDDEN);
+    if (news.userId !== userId) throw new DontAccessNewsException();
     try {
       const update: Partial<News> = {};
 
@@ -63,8 +64,7 @@ export class NewsService {
 
   async remove(userId: number, id: number) {
     const news = await this.findOne(id);
-    if (news.userId !== userId)
-      new HttpException('Dont access to news', HttpStatus.FORBIDDEN);
+    if (news.userId !== userId) throw new DontAccessNewsException();;
     try {
       await this.newsRepository.delete(id);
       return {

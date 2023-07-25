@@ -10,7 +10,7 @@ import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { UserId } from './decorators/user-id.decorator';
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { JwtRefreshTokenGuard } from './guards/jwt-refresh-token.guard';
 
 @ApiTags('auth')

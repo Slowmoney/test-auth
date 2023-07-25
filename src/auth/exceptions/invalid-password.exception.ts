@@ -1,4 +1,10 @@
-export class InvalidPasswordException {
-  message = 'Invalid Password';
-  code = 2002;
+import { UnauthorizedException } from '@nestjs/common';
+
+export class InvalidPasswordException extends UnauthorizedException {
+  constructor() {
+    super({
+      message: 'Invalid password',
+      code: 2002,
+    });
+  }
 }
