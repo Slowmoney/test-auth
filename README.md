@@ -1,2 +1,3 @@
-pnpm i
-npm run start
+docker compose build
+
+docker compose up
