@@ -16,7 +16,7 @@ services:
       - JWT_ACCESS_TOKEN_SECRET=auth_test
       - JWT_ACCESS_TOKEN_EXPIRATION_TIME=3m
       - JWT_REFRESH_TOKEN_SECRET=refresh_test
-      - JWT_REFRESH_TOKEN_EXPIRATION_TIME=6h
+      - JWT_REFRESH_TOKEN_EXPIRATION_TIME=3d
     ports: 
       - 3000:3000
   postgres:
